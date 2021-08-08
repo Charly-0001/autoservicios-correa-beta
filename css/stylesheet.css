@@ -55,6 +55,7 @@ background:#fff;
   position: relative;
   text-align: right;
   margin-right: 10px;
+  cursor: pointer;
   }
   .redesSociales img{
     width: 35px;

@@ -16,7 +16,7 @@ $totalRows_info = mysqli_num_rows($info);
 </div>
 <div class="redesSociales">
   <a href="https://www.facebook.com/FasTi-351733776019239"> <img src="img/facebook.png" alt="facebook"></a>
-  <img src="img/whatsApp.png" alt="">
+  <a href="https://api.whatsapp.com/send?phone=524411010082&text=¡Hola que tal!" black> <img src="img/whatsApp.png" alt=""></a>
 </div>
 <?php include("menu.php"); ?>
   </div>
