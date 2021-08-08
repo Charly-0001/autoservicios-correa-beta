@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<title></title>
+<meta charset="utf-8" />
+<script type="text/javascript" src="//maps.google.com/maps/api/js"></script>
+<script>
+function initMap() {
+ // Creamos un objeto mapa y especificamos el elemento DOM donde se va a mostrar.
+ var map = new google.maps.Map(document.getElementById('mapa'), {
+ center: {lat: 21.1783089, lng: -99.4434166},
+ scrollwheel: true,
+ zoom: 12,
+ zoomControl: true,
+ rotateControl : false,
+ mapTypeControl: false,
+ streetViewControl: false,
+ });
+ // Creamos dos marcadores.
+ var marker1 = new google.maps.Marker({
+ position: {lat: 21.1782039, lng: -99.4366574},
+ draggable: false,
+ title: 'Autocervicio Correa´s'
+ });
+ // a este marcador le añadimos un icono personalizado
+
+// Le asignamos el mapa a los marcadores.
+marker1.setMap(map);
+}
+</script>
+</head>
+<body onload="initMap()">
+ <div id="mapa" style="width: 350px; height: 300px;"> </div>
+</body>
+</html>

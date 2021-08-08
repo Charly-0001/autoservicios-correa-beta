@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_Buscaproductos" value="name:idProductos;datatype:int,name:strNombre;datatype:string,name:intCategoria;datatype:int,name:strImagen;datatype:string,name:intOferta;datatype:string,name:strDescripcion;datatype:string" />
+</info>
