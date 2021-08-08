@@ -1,0 +1,842 @@
+
+<?php
+* {margin:0;
+ padding:0;}
+html {
+overflow: -moz-scrollbars-vertical;
+ margin: 0;
+  padding: 0;
+  }
+
+body {
+  background:#fff;
+     margin: 0px;
+      padding: 0px;
+      min-height: 100%;
+}
+
+
+h2{
+  color: #FFF;
+  font-family:'Agency FB', arial;
+  font-weight: bold;
+  margin: 0px;
+}
+.error{
+  margin: 0px auto;
+  position: relative;
+  width: 80%;
+  background: red;
+  height: 30px;
+}
+.errores{
+  text-align: center;
+}
+h3{
+  text-align: center;
+  border: 0px;
+  padding: 0px auto;
+  color:#fff;
+  padding: 0px 20px;
+  margin: 2px auto;
+}
+
+/**************************************************BOTONES***********************/
+button{
+  margin: 0px;
+  height: 30px;
+  background: #FFF;
+  border: none;
+  color: #263D9A;
+  border-radius: 7px;
+  border: 1px solid #FFF;
+}
+
+
+#btnIngresar{
+  background: #263D9A;
+  color: #FFF;
+  width: 100px;
+  font-weight: bold;
+  float: right;
+  margin-right: 10%;
+  margin-top: 0px;
+  border: 1px solid #FFF;
+}
+
+
+/**************************************************HEADER************************/
+header{
+  width: 100%;
+  height: 120px;
+  margin: 0px;
+  padding: 0px;
+}
+.cont-header{
+  background: black;
+  position: relative;
+  height: 100%;
+  margin: 0px;
+}
+.cont-header>.fondo{
+position: absolute;
+  height: 100%;
+  width: 100%;
+}
+
+.logo{
+position: absolute;
+height: 100%;
+}
+.logo>img{
+  height: 100%;
+}
+
+/***************************************CLIENTES**************************************/
+.contClientes{
+  width: 98%;
+  margin-left: 1%;
+  margin-top: 10px;
+}
+
+.listaClientes table{
+  width: 100%;
+}
+.listaClientes table th{
+  font-size: 18px;
+  background:#263D9A;
+  color: #fff;
+}
+
+.listaClientes table tr:hover{
+  background: #BCD1FF;
+}
+.listaClientes table td:hover{
+  background: #fff;
+}
+
+
+/***************************************fin Clientes************************************/
+
+/****************************************USUARIO***************************************/
+.menu_user{
+  height: 30px;
+  text-align: center;
+  margin-left: 90%;
+  margin-top: 5px;
+  position: absolute;
+}
+.menu_user>select{
+  width: 100px;
+  margin-top:5px;
+}
+/*************************************************perfil usuario**************************/
+.cont-perfil{
+  width: auto;
+  background:#eee;
+  padding: 20px;
+  float: left;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 3px 4px;
+}
+.foto-perfil{
+  width: 200px;
+  float: left;
+}
+.foto-perfil img{
+  width: 200px;
+}
+.info-perfil{
+  width: 300px;
+  float: left;
+  margin-left: 5px;
+}
+.info-perfil h1{
+  margin: 0px;
+  color: #707070;
+}
+.info-perfil h2{
+  margin: 0px;
+  color: #000;
+  font-size: 20px;
+}
+
+#actualizarperfil{
+  background: #0141CD;
+  color: #FFF;
+  width: 100px;
+  font-weight: bold;
+  float: left;
+  border: 1px solid #FFF;
+}
+
+
+.lista-users{
+  float: left;
+  border: 1px solid #ccc;
+}
+.lista-users>a>button{
+  font-size: 30px;
+  float: right;
+}
+.lista-users>table{
+  text-align: left;
+  border: 1px solid #ccc;
+}
+.lista-users th{
+  font-size: 18px;
+  background:#263D9A;
+  color: #fff;
+}
+.lista-users th,td{
+  border-bottom: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+}
+.lista-users tr:hover{
+  background: #BCD1FF;
+}
+.lista-users td:hover{
+  background: #fff;
+  color: #000;
+  margin-left: 30px;
+}
+.lista-users img{
+  width: 60px;
+}
+
+
+
+/*************************************************perfil usuario**************************/
+
+
+/****************************************FIN-USUARIO***************************************/
+
+
+/***************************************************************FIN HEADER*******************/
+
+/***************************************************************PAJINA WEB*******************/
+.informacionEmpresa{
+  background: red;
+}
+.informacionEmpresa div{
+  float: left;
+  margin-left: 5px;
+}
+.informacionEmpresa div label{
+  display: block;
+}
+.informacionEmpresa input{
+  background: #ccc;
+  height: 30px;
+}
+.btn_Guardar{
+  background:#263D9A;
+  height: 35px;
+  color: #FFF;
+  width: 100px; margin-top: 18px;
+}
+
+.Banners{
+  width: 400px;
+  float: left;
+  box-shadow:  2px 3px 5px;
+}
+#Tips{
+  float: left;
+  width: 400px;
+  background: #ccc;
+  margin-left: 10px;
+  max-height: 480px;
+  overflow-y: scroll;
+  border-top: 1px solid #000;
+  border-left:1px solid #000;
+  box-shadow:  2px 3px 5px;
+}
+
+
+#Tips td{
+  border-top:1px solid #000;
+  border-right: 1px solid #000;
+}
+
+/***************************************************************fin pagina web*******************/
+
+
+/*********************************************menu*********************************/
+
+ul, ol {
+        list-style:none;
+
+      }
+
+     li {
+       background: #ccc;
+        float:left;
+        margin-left: 4px;
+        height:20px;
+        margin-top: 0px;
+        padding: 0px;
+      }
+
+      li a {
+        display:block;
+        font-size:19px;
+         height:19px;
+         font-family:'Agency FB', arial;
+
+       }
+
+      .respmenu a {
+        color: inherit;
+        text-decoration: none;
+        display: block;
+        padding: 4px 20px;
+        border-bottom: 2px solid #0141CD;
+        max-width: 100px;
+        background: #0141CD;
+        text-shadow: 1px 1px black;
+      }
+      .respmenu a:hover{
+        background: #0141CD;
+        border-bottom: 2px solid red;
+        color:#000;
+      }
+      .respmenu input[type="checkbox"], .respmenu .fa-bars, .respmenu .fa-times {
+        position: absolute;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        right: 0;
+        top: 0;
+        width: 30px;
+        height: 30px;
+        color: #000;
+        margin-right: 10px;
+      }
+
+      .respmenu .fa-bars, .respmenu .fa-times {
+        font-size: 40px;
+        pointer-events: none;
+      }
+
+      .respmenu input[type="checkbox"] {
+        opacity: 0;
+      }
+
+      .respmenu {
+        color: white;
+        position: relative;
+        background:none;
+        min-height: 40px;
+        margin-top: 70px;
+        float: right;
+        margin-right: 10px;
+      }
+
+      .respmenu nav {
+        display: block;
+      }
+
+      .respmenu input:checked ~ nav {
+        display: block;
+      }
+
+      .respmenu input:checked ~ .fa-bars {
+        display: none;
+      }
+
+      .respmenu input:not(:checked) ~ .fa-times {
+        display: none;
+      }
+
+      .respmenu>i{
+        display: none;
+      }
+
+/*************************************************CONTENIDO*********************************/
+/*******************************************************************************************/
+.contenido{
+margin-top: 1px;
+min-height:580px;
+max-width: 100%;
+
+}
+
+/***************************************************Login**********************************/
+.targeta{
+  background:url(../../img/fondoLogin.jpg) no-repeat right center ;
+  width: 500px;
+  margin: 0 auto;
+  height: 200px;
+  box-shadow: 2px 3px 5px #000;
+  margin-top:4px;
+  position: relative;
+}
+.transparencia{
+  position:absolute;
+  width: 100%;
+  height: 200px;
+  background:#0141CD;
+  opacity:0.8;
+}
+
+.targeta > form{
+  position: absolute;
+  width:100%;
+  }
+  .targeta > form>h2{
+    margin-left: 45px;
+  }
+.targeta > form>label{
+  margin-left: 45px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 0px;
+}
+.targeta > form>input{
+  height: 25px;
+  width: 400px;
+  margin-left: 45px;
+}
+.con_pass{
+  background: #FFF;
+  width: 408px;
+  margin-left: 45px;
+}
+.targeta > form>.con_pass>#password{
+  width:362px;
+  border: none;
+  height: 25px;
+}
+.targeta a{
+  text-decoration: none;
+  float: left;
+  margin-left: 45px;
+  color: #FFF;
+  font-weight: bold;
+}
+.targeta #mstrpass{
+  background: none;
+  height: 25px;
+  border: none;
+}
+.targeta #mstrpass>i{
+color: #0141CD;
+}
+.targeta #ocultar_pass{
+  display:none;
+}
+
+/************************************************************************************/
+
+/***************************************************Productos**********************************/
+
+.contenido_header{
+  margin-top: 0px;
+  margin-left: 10px;
+  margin-top: 10px;
+  height: 35px;
+  width: 90%;
+}
+.buscador{
+  float: left;
+  margin-right: 20px;
+}
+.btn_servicios button{
+  background:#0141CD;
+  color: #FFF;
+}
+
+
+.btn-abrir-popup{
+  background: blue;
+  width: 35px;
+  height: 35px;
+  font-size: 25px;
+  text-align: center;
+  float: left;
+  border-radius: 100%;
+  cursor: pointer;
+  color: #FFF;
+  margin-right: 10px;
+}
+.btn-abrir-popup:hover{
+  box-shadow: 1px 2px 3px #0141CD;
+}
+
+.buscador{
+  height: 30px;
+}
+.buscador input{
+  height: 25px;
+  margin:0px;
+  padding: 0px;
+}
+.buscador #busqueda{
+  border-radius: 7px;
+  width: 300px;
+}
+.buscador button{
+  margin: 0px;
+  padding: 0px;
+  width: 45px;
+  border: 1px solid #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.contProductos{
+  min-width: 330px;
+  padding: 0px auto;
+  display:flow-root;
+}
+
+.producto{
+  margin: 10px;
+  height: 300px;
+  width: 200px;
+  background:#FFF;
+  border:1px solid #ccc;
+  float:left;
+}
+.producto:hover{
+  box-shadow: 2px 3px 10px #0141CD;
+}
+.imagen{
+height: 200px;
+max-width: 200px;
+text-align: center;
+}
+.imagen img{
+height: 200px;
+max-width: 200px;
+}
+
+.producto .nombre{
+  background: #EEE;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  height: 25px;
+  overflow-x: auto;
+  text-transform: uppercase;
+  margin: 0px;
+}
+.producto>p{
+  text-align: justify;
+  font-size: 15px;
+  height: 45px;
+  overflow-x: auto;
+  margin: 0px;
+}
+.btn{
+  height: 25px;
+  font-size: 25px;
+}
+
+/*************************************************************************************/
+
+
+/*******************************************************************************************/
+/*******************************************************************************************/
+
+
+footer{
+  position: absolute;
+  height: 80px;
+  width: 100%;
+  background: #000;
+}
+footer> .logo{
+  height: 100%;
+}
+
+footer> .logo>img{
+  height: 60px;
+}
+.copyright{
+  color: #FFF;
+}
+
+/*///////////////////////////////////////////
+////////////////////////////////////////////////*/
+
+
+
+/*******    ******************************
+                POPUP
+************************************/
+#popup>h1{
+  background:#0141CD;
+  margin: 0px;
+  color: #FFF;
+}
+.overlay,.overlay-edit {
+	background: rgba(0,0,0,.6);
+	position: fixed; /*para que abarque toda la pantalla*/
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	align-items: center; /*acomoda a la altura nesesaria*/
+	justify-content: center;/*centra respecto a lo que lo contiene*/
+	display: flex; /* alluda a centrar*/
+  overflow-x: scroll;
+}
+.overlay{visibility: hidden; /* Oculta*/}
+.overlay.active,.overlay-edit.active {/*se pone otraves el overlay cuando se pone la clase active*/
+	visibility: visible;
+}
+
+.popup, .popup-edit {
+	background: #F8F8F8;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+  background: #F8F8F8;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+	border-radius: 3px;
+	font-family: 'Montserrat', sans-serif;
+	padding: 0px;
+	text-align: center;
+	width: 400px;
+}
+
+.popup .btn-cerrar-popup,.popup-edit .btn-cerrar-popup-edit {
+	font-size: 20px;
+	line-height: 1px;
+	display: block;
+	text-align: right;
+	transition: .3s ease all;
+	color: #BBBBBB;
+}
+
+.popup .btn-cerrar-popup:hover,.popup .btn-cerrar-popup,.popup-edit .btn-cerrar-popup-edit:hover {
+	color: #000;
+}
+.popup h3 ,.popup-edit h3 {
+	font-size: 36px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	/*opacity: 0;*/
+}
+.popup h4, .popup-edit h4 {
+	font-size: 26px;
+	font-weight: 300;
+	margin-bottom: 40px;
+/*	opacity: 0;*/
+}
+
+.popup form .contenedor-inputs, .popup-edit form .contenedor-inputs {
+	/*opacity: 0;  para que no se mire*/
+
+}
+
+.popup form .contenedor-inputs input, .popup form .contenedor-inputs select, .popup-edit form .contenedor-inputs input, .popup-edit form .contenedor-inputs select {
+	width: 96%;
+	margin-bottom: 2px;
+	height: 28px;
+	font-size: 18px;
+	line-height: 52px;
+	text-align: center;
+	border: 1px solid #BBBBBB;
+  border-bottom: 0px;
+}
+.popup form .contenedor-inputs label, .popup-edit form .contenedor-inputs label{
+  float: left;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.popup form .btn-submit, .popup-edit form .btn-submit {
+	padding: 0 20px;
+	height: 40px;
+	line-height: 40px;
+	border: none;
+	color: #fff;
+	background:blue;
+	border-radius: 3px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+	cursor: pointer;
+	transition: .3s ease all;
+}
+
+.popup form .btn-submit:hover, .popup-edit form .btn-submit:hover {
+	background: rgba(94,125,227, .9);
+}
+
+
+/*******    ******************************
+                POPUP PRODUCTOS
+************************************/
+
+.overlay-productos {
+	background: rgba(0,0,0,.6);
+	position: fixed; /*para que abarque toda la pantalla*/
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	align-items: center; /*acomoda a la altura nesesaria*/
+	justify-content: center;/*centra respecto a lo que lo contiene*/
+	display: flex; /* alluda a centrar*/
+  overflow-x: scroll;
+}
+.overlay-productos{visibility: hidden; /* Oculta*/}
+.overlay-productos.active{/*se pone otraves el overlay cuando se pone la clase active*/
+	visibility: visible;
+}
+
+.popup-productos{
+	background: #F8F8F8;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+  background: #F8F8F8;
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
+	border-radius: 3px;
+	font-family: 'Montserrat', sans-serif;
+	padding: 0px;
+	text-align: center;
+	width: 80%;
+}
+
+.popup-productos .btn-cerrar-popup-productos {
+	font-size: 20px;
+	line-height: 1px;
+	display: block;
+	text-align: right;
+	transition: .3s ease all;
+	color: #BBBBBB;
+}
+
+.popup-productos .btn-cerrar-popup-productos:hover{
+	color: #000;
+}
+.popup-productos h3 {
+	font-size: 36px;
+	font-weight: 600;
+	margin-bottom: 10px;
+	/*opacity: 0;*/
+}
+.popup-productos h4{
+	font-size: 26px;
+	font-weight: 300;
+	margin-bottom: 40px;
+/*	opacity: 0;*/
+}
+
+.popup-productos form .contenedor-inputs {
+	/*opacity: 0;  para que no se mire*/
+
+}
+
+.popup-productos form .contenedor-inputs input, .popup-productos form .contenedor-inputs select {
+	width: 96%;
+	margin-bottom: 2px;
+	height: 28px;
+	font-size: 18px;
+	line-height: 52px;
+	text-align: center;
+	border: 1px solid #BBBBBB;
+  border-bottom: 0px;
+}
+.popup-productos form .contenedor-inputs label{
+  float: left;
+  padding: 5px;
+  font-weight: bold;
+}
+
+.popup-productos form .btn-submit{
+	padding: 0 20px;
+	height: 40px;
+	line-height: 40px;
+	border: none;
+	color: #fff;
+	background:blue;
+	border-radius: 3px;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+	cursor: pointer;
+	transition: .3s ease all;
+}
+
+.popup-productos form .btn-submit:hover{
+	background: rgba(94,125,227, .9);
+}
+/*************************************************************************************/
+
+      @media screen and (max-width:1200px) {
+  /*****************************************MENU************************************/
+li {
+    background: #ccc;
+     float:none;
+     margin-left:0px;
+     height:0px;
+     margin-top: 30px;
+   }
+
+   li a {
+     display:none;
+     font-size:18px;
+      height:15px;}
+  .respmenu a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+    padding: 0px auto;
+    border-bottom: 2px solid red;
+    max-width: 85%;
+    background: #234567;
+    text-shadow: 1px 1px black;
+  }
+  .respmenu input[type="checkbox"], .respmenu .fa-bars, .respmenu .fa-times {
+    position: absolute;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    right: 0;
+    top: 0;
+    width: 40px;
+    height: 40px;
+  }
+
+  .respmenu .fa-bars, .respmenu .fa-times {
+    font-size: 40px;
+    pointer-events: none;
+  }
+
+  .respmenu input[type="checkbox"] {
+    opacity: 0;
+  }
+
+  .respmenu {
+    margin-top: 80px;
+    color: white;
+    position: relative;
+    min-height: 40px;
+  }
+
+  .respmenu nav {
+    display: none;
+  }
+
+  .respmenu input:checked ~ nav {
+    display: block;
+  }
+
+  .respmenu input:checked ~ .fa-bars {
+    display: none;
+  }
+
+  .respmenu input:not(:checked) ~ .fa-times {
+    display: none;
+  }
+  .respmenu>i{
+    display: block;
+    margin-right: 100px;
+  }
+  /************************************************FIN MENU**************************/
+
+}
+
+?>

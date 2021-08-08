@@ -20,5 +20,5 @@ $totalRows_info = mysqli_num_rows($info);
 </div>
 <?php include("menu.php"); ?>
   </div>
-  <script src="http://localhost:35729/livereload.js" charset="utf-8">//Plugin para poder correr la web en tiempo real
+  <!--<script src="http://localhost:35729/livereload.js" charset="utf-8">//Plugin para poder correr la web en tiempo real -->
   </script>
