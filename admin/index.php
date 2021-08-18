@@ -1,6 +1,4 @@
-<?php require_once('../Connections/conexion2.php'); ?><!--INSTANCIAMOS LA CONEXION-->
-
-<!--VALIDAMOS EL ACCESO POR URL-->
+<?php require_once('../Connections/conexion2.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
@@ -33,10 +31,8 @@ global $conexion2;
 }
 }
 ?>
-<!--FIN DE VALIDACION DE ACCESO-->
-
 <?php
-// *** VALIDACION DE CAMPOS DE ACCESO.
+// *** Validate request to login to this site.
 if (!isset($_SESSION)) {
   session_start();
 }
@@ -77,19 +73,29 @@ if (isset($_POST['Email'])) {
     $_SESSION['audio']=$loginUsername;
 
 
-    require_once('log.php');
-$nombreUsuario = loginlog( $_SESSION['MM_Username']);
 
-    header("Location: " . $MM_redirectLoginSuccess );
     if (isset($_SESSION['PrevUrl']) && false) {
 
       $MM_redirectLoginSuccess = $_SESSION['PrevUrl'];
     }
+    header("Location: " . $MM_redirectLoginSuccess );
+    require_once('log.php');
+ $nombreUsuario = loginlog( $_SESSION['MM_Username']);
   }
-  ///contraseña incorrecta
+  else {
+
+    header("Location: ". $MM_redirectLoginFailed );
+    //contraseña incorrescta
+    require_once('log.php');
+  $nombreUsuario = errorlog( $_SESSION['MM_Username']);
+
+  }
+
 }//ALTA/BAJA
   else {
     header("Location: ". $MM_redirectLoginFailed );
+    require_once('log.php');
+  $nombreUsuario = errorlog( $_SESSION['MM_Username']);
   }
 }
 ?>
@@ -159,7 +165,7 @@ $nombreUsuario = loginlog( $_SESSION['MM_Username']);
           <br>
           <td nowrap="nowrap" align="right">&nbsp;</td>
           <div class="recordPass">
-            <a href=""><i class="fas fa-unlock-alt"></i> Olvide mi contraseña</a>
+            <!--<a href=""><i class="fas fa-unlock-alt"></i> Olvide mi contraseña</a> -->
           </div>
           <td><button type="submit" id="btnIngresar">Ingresar</bottom></td>
       <input type="hidden" name="MM_insert" value="form1" />

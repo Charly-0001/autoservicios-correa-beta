@@ -3,7 +3,7 @@
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
-   if (PHP_VERSION < 6) {
+   if (PHP_VERSION < 7) {
      $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
    }
  global $conexion2;
@@ -76,6 +76,11 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
   exit;
 }
 
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
+
 
 //LISTA DE PRODUCTOS
 $query_productos = "SELECT * FROM productos_servicios WHERE productos_servicios.Tipo='Producto' ORDER BY productos_servicios.id ASC";
@@ -88,12 +93,11 @@ if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "addproducto")) {
 
 $imagen=$_FILES ["imagen"]["name"];
 	move_uploaded_file ($_FILES ["imagen"]["tmp_name"],"../imagenes/productos/".$imagen);
-  $duracion_minima;
-  $descripcion_larga;
+
   $Tipo="producto";
 
-  $insertSQL = sprintf("INSERT INTO productos_servicios (Codigo,Nombre,Precio,Stock,Stock_max,Stock_min,Codigo_proveedor,Descripcion_corta,Descripcion_larga,Duracion_minima,Imagen,Tipo,puntos)
-                                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+  $insertSQL = sprintf("INSERT INTO productos_servicios (Codigo,Nombre,Precio,Stock,Stock_max,Stock_min,Codigo_proveedor,Descripcion_corta,Imagen,Tipo,puntos)
+                                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
                        GetSQLValueString($_POST['codigo'], "text"),
                        GetSQLValueString($_POST['nombre'], "text"),
                        GetSQLValueString($_POST['precio'], "double"),
@@ -102,8 +106,6 @@ $imagen=$_FILES ["imagen"]["name"];
                        GetSQLValueString($_POST['stock_min'], "double"),
                        GetSQLValueString($_POST['codigo_proveedor'], "text"),
                        GetSQLValueString($_POST['descripcion_corta'],"text"),
-                       GetSQLValueString($descripcion_larga,"text"),
-                       GetSQLValueString($duracion_minima,"int"),
                        GetSQLValueString($imagen,"text"),
                        GetSQLValueString($Tipo,"text"),
                       GetSQLValueString($_POST['puntos'],"int"));
@@ -161,24 +163,24 @@ else{
   $dir="../imagenes/productos/".$row_productoedit['Imagen']; //ubicación en el host (EJ, /imagenes/foto.jpg)
   if(file_exists($dir)) //verifica que el archivo existe
    {
-   if(unlink($dir)) // si es true, llama la función
-  echo "El archivo fue borrado";
+   if(unlink($dir)){ // si es true, llama la función
+  //echo "El archivo fue borrado";
+   }
    }
   else{
-   echo "Este archivo no existe";} //si no, lo avisa.
+   //echo "Este archivo no existe";
+   } //si no, lo avisa.
 
    $imagen=$_FILES ["imagen"]["name"];
     move_uploaded_file ($_FILES ["imagen"]["tmp_name"],"../imagenes/productos/".$imagen);
   }
 
-   $duracion_minima;
-   $descripcion_larga;
+
    $Tipo="producto";
 
   $updateSQL = sprintf("UPDATE productos_servicios SET
       Codigo=%s,Nombre=%s,Precio=%s,Stock=%s,Stock_max=%s,
-      Stock_min=%s,Codigo_proveedor=%s,Descripcion_corta=%s,
-      Descripcion_larga=%s,Duracion_minima=%s,Imagen=%s,Tipo=%s, puntos=%s
+      Stock_min=%s,Codigo_proveedor=%s,Descripcion_corta=%s,Imagen=%s,Tipo=%s, puntos=%s
       WHERE Id=$ID",
       GetSQLValueString($_POST['codigo'], "text"),
       GetSQLValueString($_POST['nombre'], "text"),
@@ -188,8 +190,6 @@ else{
       GetSQLValueString($_POST['stock_min'], "double"),
       GetSQLValueString($_POST['codigo_proveedor'], "text"),
       GetSQLValueString($_POST['descripcion_corta'],"text"),
-      GetSQLValueString($descripcion_larga,"text"),
-      GetSQLValueString($duracion_minima,"int"),
       GetSQLValueString($imagen,"text"),
       GetSQLValueString($Tipo,"text"),
       GetSQLValueString($_POST['puntos'],"int"));

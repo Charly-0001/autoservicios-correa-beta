@@ -3,7 +3,7 @@
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
-   if (PHP_VERSION < 6) {
+   if (PHP_VERSION < 7) {
      $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
    }
  global $conexion2;
@@ -76,6 +76,11 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
   exit;
 }
 
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
+
 
 //LISTA DE SERVICIOS
 $query_servicios = "SELECT * FROM productos_servicios WHERE productos_servicios.Tipo='servicio' ORDER BY productos_servicios.id ASC";
@@ -90,8 +95,8 @@ $imagen=$_FILES ["imagen"]["name"];
 	move_uploaded_file ($_FILES ["imagen"]["tmp_name"],"../imagenes/Servicios/".$imagen);
   $Tipo="servicio";
 
-  $insertSQL = sprintf("INSERT INTO productos_servicios (Codigo,Nombre,Precio,Stock,Stock_max,Stock_min,Codigo_proveedor,Descripcion_corta,Descripcion_larga,Duracion_minima,Imagen,Tipo)
-                                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
+  $insertSQL = sprintf("INSERT INTO productos_servicios (Codigo,Nombre,Precio,Stock,Stock_max,Stock_min,Codigo_proveedor,Descripcion_corta,Descripcion_larga,Duracion_minima,Imagen,Tipo,puntos)
+                                    VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
                        GetSQLValueString("NULL", "text"),
                        GetSQLValueString($_POST['nombre'], "text"),
                        GetSQLValueString($_POST['precio'], "double"),
@@ -103,7 +108,8 @@ $imagen=$_FILES ["imagen"]["name"];
                        GetSQLValueString($_POST['descripcion_larga'],"text"),
                        GetSQLValueString($_POST['duracion'],"int"),
                        GetSQLValueString($imagen,"text"),
-                       GetSQLValueString($Tipo,"text"));
+                       GetSQLValueString($Tipo,"text"),
+                      GetSQLValueString($_POST['puntos'],"int"));
 
                        $Result1 = mysqli_query($conexion2,$insertSQL ) or die(mysqli_error($conexion2));
                        $insertGoTo = "cat_servicios.php";
@@ -155,11 +161,13 @@ else{
   $dir="../imagenes/productos/".$row_productoedit['Imagen']; //ubicación en el host (EJ, /imagenes/foto.jpg)
   if(file_exists($dir)) //verifica que el archivo existe
    {
-   if(unlink($dir)) // si es true, llama la función
-  echo "El archivo fue borrado";
+   if(unlink($dir)){ // si es true, llama la función
+  //echo "El archivo fue borrado";
+   }
    }
   else{
-   echo "Este archivo no existe";} //si no, lo avisa.
+  //echo "Este archivo no existe";
+  } //si no, lo avisa.
 
    $imagen=$_FILES ["imagen"]["name"];
     move_uploaded_file ($_FILES ["imagen"]["tmp_name"],"../imagenes/Servicios/".$imagen);
@@ -170,7 +178,7 @@ else{
   $updateSQL = sprintf("UPDATE productos_servicios SET
       Codigo=%s,Nombre=%s,Precio=%s,Stock=%s,Stock_max=%s,
       Stock_min=%s,Codigo_proveedor=%s,Descripcion_corta=%s,
-      Descripcion_larga=%s,Duracion_minima=%s,Imagen=%s,Tipo=%s
+      Descripcion_larga=%s,Duracion_minima=%s,Imagen=%s,Tipo=%s,puntos=%s
       WHERE Id=$ID",
       GetSQLValueString("NULL", "text"),
       GetSQLValueString($_POST['nombre'], "text"),
@@ -183,7 +191,8 @@ else{
       GetSQLValueString($_POST['descripcion_larga'],"text"),
       GetSQLValueString($_POST['duracion'],"int"),
       GetSQLValueString($imagen,"text"),
-      GetSQLValueString($Tipo,"text"));
+      GetSQLValueString($Tipo,"text"),
+      GetSQLValueString($_POST['puntos'],"int"));
 
 
   $Result1 = mysqli_query($conexion2,$updateSQL) or die(mysqli_error($conexion2));
@@ -254,7 +263,7 @@ function descripcionCortaedit(obj){
 <div class="contenido">
   <div class="contenido_header">
     <button <?php if($_SESSION['tipo']=="Master"){ ?> <?php } else{?> onClick="javascript:return noautorizado();"<?php }?>class="btn-abrir-popup"  id="btn-abrir-popup" ><i class="fas fa-plus"></i> </button>
-    <div class="buscador"><?php include("buscadores\bsServicios.php");//Creacion de buscador ?></div>
+    <div class="buscador"><?php include("buscadores/bsServicios.php");//Creacion de buscador ?></div>
     <?php include("includes/btn_servicios.php");?>
   </div>
 
@@ -319,7 +328,7 @@ function descripcionCortaedit(obj){
 
 <!--****************************************************************************-->
 <?php if($_SESSION['tipo']=="Master"){ ?>
-<!--FORMULARIO ADD-PRODUCTO EMERGENTE-->
+<!--FORMULARIO ADD-SERVICIO EMERGENTE-->
 <div class="overlay" id="overlay">
 			<div class="popup" id="popup">
 
@@ -337,9 +346,12 @@ function descripcionCortaedit(obj){
             <label for="precio">Precio</label>
 						<input style="width:15%; float:left;" type="number" name="precio"  placeholder="0.00" min="0.01" required step="0.01" title="Precio a la venta" pattern="^\d+(?:\.\d{1,2})?$" onblur="
               this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'">
-            <label for="Duracion">Duracion en min</label>
-            <input style="width:20%; float:left;" type="number" name="duracion"  placeholder="Minutos" min="0.01" required step="0.01" title="Duración estimada" pattern="^\d+(?:\.\d{1,2})?$" onblur="
+            <label for="Duracion">Duracion</label>
+            <input style="width:15%; float:left;" type="number" name="duracion"  placeholder="Minutos" min="0.01" required step="0.01" title="Duración estimada" pattern="^\d+(?:\.\d{1,2})?$" onblur="
               this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'">
+              <label for="Puntos">Puntos</label>
+              <input style="width:10%; float:left;" type="number" name="puntos"  placeholder="1" min="0.01" required step="0.01" title="Puntos acomulados para el cliente" pattern="^\d+(?:\.\d{1,2})?$" onblur="
+                this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'">
 
             <hr style="width:96%; ">
 
@@ -371,7 +383,7 @@ function descripcionCortaedit(obj){
 <?php if($ID!=0){ ?>
 
       <div class="overlay-edit" id="overlay" style="  ">
-      			<div class="popup-edit" id="popup">
+      			<div class="popup-edit" id="popup" >
 
               <h1><i class="fas fa-pen" style="font-size:20px;"></i> Servicio</h1>
       				<form action="<?php echo $editFormAction; ?>" enctype="multipart/form-data" method="post" name="actualizar" id="actualizar" style="overflow: scroll;max-height:500px;">
@@ -384,13 +396,17 @@ function descripcionCortaedit(obj){
 
                   <hr style="width:96%;">
                   <label for="precio">Precio</label>
-      						<input style="width:20%; float:left;" type="number" name="precio" placeholder="0.00" min="0.01" required step="0.01" title="Precio a la venta" pattern="^\d+(?:\.\d{1,2})?$" onblur="
+      						<input style="width:15%; float:left;" type="number" name="precio" placeholder="0.00" min="0.01" required step="0.01" title="Precio a la venta" pattern="^\d+(?:\.\d{1,2})?$" onblur="
         this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'"
         value="<?php echo $row_productoedit['Precio']?>">
         <label for="precio">Duración</label>
-        <input style="width:20%; float:left;" type="number" name="duracion" placeholder="0.00" min="0.01" required step="0.01" title="Duracion en minutos" pattern="^\d+(?:\.\d{1,2})?$" onblur="
+        <input style="width:15%; float:left;" type="number" name="duracion" placeholder="0.00" min="0.01" required step="0.01" title="Duracion en minutos" pattern="^\d+(?:\.\d{1,2})?$" onblur="
         this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'"
         value="<?php echo $row_productoedit['Duracion_minima']?>">
+        <label for="Puntos">Puntos</label>
+        <input style="width:10%; float:left;" type="number" name="puntos"  placeholder="1" min="0.01" required step="0.01" title="Puntos acomulados para el cliente" pattern="^\d+(?:\.\d{1,2})?$" onblur="
+          this.parentNode.parentNode.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'"
+          value="<?php echo $row_productoedit['puntos']?>">
 
                   <hr style="width:96%; border:none;">
 

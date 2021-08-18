@@ -591,15 +591,13 @@ footer> .logo>img{
 }
 
 .popup, .popup-edit {
-	background: #F8F8F8;
-	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
   background: #F8F8F8;
 	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);
 	border-radius: 3px;
 	font-family: 'Montserrat', sans-serif;
 	padding: 0px;
 	text-align: center;
-	width: 400px;
+	width: 98%;
 }
 
 .popup .btn-cerrar-popup,.popup-edit .btn-cerrar-popup-edit {

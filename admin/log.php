@@ -30,6 +30,10 @@ global $conexion2;
   return $theValue;
 }
 }
+?>
+<?php
+
+
 
 function getRealIP()
 {
@@ -113,9 +117,8 @@ $descripcion="Secion serrada-".$user;
                        GetSQLValueString($ubicacion, "text"),
                        GetSQLValueString($descripcion, "text"));
 	$loginlog = mysqli_query( $conexion2,$query_loginlog) or die(mysqli_error());
-
-
 	mysqli_free_result($ConsultaFuncion);
+
 }
 
 //log de registro de servicio/producto
@@ -227,7 +230,7 @@ $descripcion="Acceso al sistema-".$admin;
 	$loginlog = mysqli_query( $conexion2,$query_loginlog) or die(mysqli_error());
 echo '<script type="text/javascript">console.log("Acceso correcto");</script>';
 
-	return $mensaje;
+	//return $mensaje;
 	mysqli_free_result($ConsultaFuncion);
 }
 

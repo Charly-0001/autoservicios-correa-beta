@@ -1,6 +1,4 @@
-<?php require_once('../Connections/conexion2.php'); ?><!--INSTANCIAMOS LA CONEXION-->
-
-<!--VALIDAMOS EL ACCESO POR URL-->
+<?php require_once('../Connections/conexion2.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
@@ -33,32 +31,17 @@ global $conexion2;
 }
 }
 ?>
-<!--FIN DE VALIDACION DE ACCESO-->
 <?php
-
-
-// *** VALIDACION DE CAMPOS DE ACCESO.
+// *** Validate request to login to this site.
 if (!isset($_SESSION)) {
   session_start();
-}
-
-if($_SESSION['audio']==""){
-?>
-<audio controls preload="auto|metadata|auto" autoplay style="display:none;" >
-    <source src="../acceso_denegado.wav" type="audio/mpeg"  />
-    <source src="acceso_permitido.wav" type="audio/ogg" />
-    <source src="acceso_permitido.wav" type="audio/wav" />
-    Lo que pongas aquí se muestra si el navegador no soporta la etiqueta audio.
-</audio>
-
-<?php
-$_SESSION['audio']="";
 }
 
 $loginFormAction = $_SERVER['PHP_SELF'];
 if (isset($_GET['accesscheck'])) {
   $_SESSION['PrevUrl'] = $_GET['accesscheck'];
 }
+
 
 if (isset($_POST['Email'])) {
   $loginUsername=$_POST['Email'];
@@ -69,7 +52,7 @@ if (isset($_POST['Email'])) {
   $MM_redirecttoReferrer = false;
 
 
-  $LoginRS__query=sprintf("SELECT * FROM administracion WHERE Email=%s OR Nombre_completo=%s",
+  $LoginRS__query=sprintf("SELECT * FROM administracion WHERE Email=%s OR Nombre_completo =%s",
     GetSQLValueString($loginUsername, "text"),
     GetSQLValueString($loginUsername, "text"));
 
@@ -89,14 +72,24 @@ if (isset($_POST['Email'])) {
     $_SESSION['tipo']=$row_LoginRS["tipo"];
     $_SESSION['audio']=$loginUsername;
 
+
+
     if (isset($_SESSION['PrevUrl']) && false) {
+
       $MM_redirectLoginSuccess = $_SESSION['PrevUrl'];
     }
     require_once('log.php');
-    $nombreUsuario = loginlog( $_SESSION['MM_Username']);
+ //$nombreUsuario = loginlog( $_SESSION['MM_Username']);
+
     header("Location: " . $MM_redirectLoginSuccess );
   }
-  ///contraseña incorrecta
+  else {
+
+    header("Location: ". $MM_redirectLoginFailed );
+    //contraseña incorrescta
+
+  }
+
 }//ALTA/BAJA
   else {
     header("Location: ". $MM_redirectLoginFailed );
@@ -137,6 +130,22 @@ console.log('Usuario no detectado');
 </head>
 
 <body>
+
+<?php if($_SESSION['audio']==""){
+?>
+<audio controls preload="auto|metadata|auto" autoplay style="display:none;" >
+    <source src="../acceso_denegado.wav" type="audio/mpeg"  />
+    <source src="acceso_permitido.wav" type="audio/ogg" />
+    <source src="acceso_permitido.wav" type="audio/wav" />
+    Lo que pongas aquí se muestra si el navegador no soporta la etiqueta audio.
+</audio>
+
+<?php
+$_SESSION['audio']="";
+}
+?>
+
+
   <?php $logo=logocorreas(); ?>
   <header>
     <div class="cont-header">

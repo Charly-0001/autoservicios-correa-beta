@@ -1,3 +1,4 @@
+<?php require_once('../Connections/conexion2.php'); ?>
 <?php
 if (!isset($_SESSION)) {
   session_start();
@@ -42,9 +43,15 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
   header("Location: ". $MM_restrictGoTo);
   exit;
 }
-?>
-<!--termino de validacion para no entrar a utras paginas con la url-->
-<?php require_once('../Connections/conexion2.php');
+
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
+
+
+//termino de validacion para no entrar a utras paginas con la url
+
 
 //LISTA DE CLIENTES
 $query_clientes = "SELECT * FROM clientes ORDER BY clientes.Nombre ASC";
@@ -117,7 +124,7 @@ $totalRows_clienteedit = mysqli_num_rows($clienteedit);
 
 if ((isset($_POST["MM_updatecliente"])) && ($_POST["MM_updatecliente"] == "actualizarcliente")) {
 
-$imagen=$_FILES ["foto"]["name"];
+$imagen=$_FILES ["fotocliente"]["name"];
 if($imagen==""){
   $imagen=$row_clienteedit['foto'];
 }
@@ -125,14 +132,16 @@ else{
   $dir="../imagenes/clientes/".$row_clienteedit['foto']; //ubicación en el host (EJ, /imagenes/foto.jpg)
   if(file_exists($dir)) //verifica que el archivo existe
    {
-   if(unlink($dir)) // si es true, llama la función
-  echo "El archivo fue borrado";
+   if(unlink($dir)){ // si es true, llama la función
+  //echo "El archivo fue borrado";
+    }
    }
   else{
-   echo "Este archivo no existe";} //si no, lo avisa.
+   //echo "Este archivo no existe";
+ } //si no, lo avisa.
 
-   $imagencliente=$_FILES ["foto"]["name"];
-    move_uploaded_file ($_FILES ["foto"]["tmp_name"],"../imagenes/clientes/".$imagen);
+   $imagencliente=$_FILES ["fotocliente"]["name"];
+    move_uploaded_file ($_FILES ["fotocliente"]["tmp_name"],"../imagenes/clientes/".$imagen);
   }
 
    $Tipo="Actualizacion_cliente";
@@ -206,15 +215,17 @@ else{
             </tr>
             <?php do { ?>
               <tr>
-                <td ><?php echo $row_buscacliente['registro'] ?></td>
+                <td style="max-width:100px;"><?php echo $row_buscacliente['registro'] ?></td>
                 <td><?php echo $row_buscacliente['Nombre'] ?> <?php echo $row_buscacliente['Apeido_paterno'] ?> <?php echo $row_buscacliente['Apeido_materno'] ?></td>
                 <td> <a href="tel:<?php echo $row_buscacliente['Telefono'] ?>"></a> </td>
                 <td><?php echo $row_buscacliente['Municipio'] ?> - <?php echo $row_buscacliente['Estado'] ?> - <?php echo $row_buscacliente['Pais'] ?> - <?php echo $row_buscacliente['Codigo_postal'] ?></td>
+
                 <?php //LISTA DE COMPRAS POR CLIENTE
-                $query_compras = "SELECT * FROM ventas where ventas.Id_cliente='%".$row_buscacliente."%'";
+                $query_compras = "SELECT * FROM ventas where ventas.Id_cliente='%".$row_buscacliente['Id']."%'";
                 $compras = mysqli_query($conexion2,$query_compras) or die(mysqli_error($conexion2));
                 $row_compras = mysqli_fetch_assoc($compras);
                 $totalRows_compras = mysqli_num_rows($compras); ?>
+
                 <td> <?php echo $totalRows_compras ?></td>
                 <td><?php echo $row_buscacliente['puntos'] ?></td>
                 <td><a href="clientes.php?id=<?php echo base64_encode($row_buscacliente['Id']); ?>"> <button type="submit"><i class="fas fa-edit"></i> </button></a> </td>
@@ -244,11 +255,13 @@ else{
                 <td><?php echo $row_clientes['Nombre'] ?> <?php echo $row_clientes['Apeido_paterno'] ?> <?php echo $row_clientes['Apeido_materno'] ?></td>
                 <td><a href="Tel:<?php echo $row_clientes['Telefono'] ?>"><?php echo $row_clientes['Telefono'] ?></a> </td>
                 <td><?php echo $row_clientes['Municipio'] ?> - <?php echo $row_clientes['Estado'] ?> - <?php echo $row_clientes['Pais'] ?> - <?php echo $row_clientes['Codigo_postal'] ?></td>
+
                 <?php //LISTA DE COMPRAS POR CLIENTE
-                $query_compras = "SELECT * FROM ventas where ventas.Id_cliente='%".$row_buscacliente."%'";
+                $query_compras = "SELECT * FROM ventas where ventas.Id_cliente='%".$row_clientes['Id']."%'";
                 $compras = mysqli_query($conexion2,$query_compras) or die(mysqli_error($conexion2));
                 $row_compras = mysqli_fetch_assoc($compras);
                 $totalRows_compras = mysqli_num_rows($compras); ?>
+
                 <td> <?php echo $totalRows_compras ?></td>
                 <td><?php echo $row_clientes['puntos'] ?></td>
                 <td><a href="clientes.php?id=<?php echo base64_encode($row_clientes['Id']); ?>"> <button type="submit"><i class="fas fa-edit" style="cursor:pointer;"></i> </button></a> </td>
@@ -333,7 +346,7 @@ else{
                     <img src="../imagenes/clientes/<?php echo $row_clienteedit['foto']?>" alt="" style="height:100px;cursor:pointer; float:center; position:relative;;"onclick="document.getElementById('fotocliente').click()" />
 
                     <i class="fa fa-camera" style="float:center; relative;margin-top: 70px;cursor:pointer; " onclick="document.getElementById('fotocliente').click()"></i>
-        						<input style="width:50%; height: 40px;float:left; display:none" type="file" name="foto"id="fotocliente" title="Seleciona una imagen de perfil">
+        						<input style="width:50%; height: 40px;float:left; display:none" type="file" name="fotocliente"id="fotocliente" title="Seleciona una imagen de perfil">
                     <hr style="width:96%;">
 
 
@@ -359,7 +372,7 @@ else{
                     <label for="Municipio">Municipio</label>
                     <input style="width:25%; float:left;" type="text" name="municipio" title="Municipio de origen" placeholder="Municipio" value="<?php echo $row_clienteedit['Municipio']; ?>" >
                     <label for="CP">CP</label>
-                    <input style="width:17%; float:left;" type="text" name="CP" placeholder="76315" title="Codigo postal" maxlength="5"minlength="5 value="<?php echo $row_clienteedit['Codigo_postal']; ?>">
+                    <input style="width:17%; float:left;" type="text" name="CP" placeholder="76315" title="Codigo postal" maxlength="5"minlength="5" value="<?php echo $row_clienteedit['Codigo_postal']; ?>">
                     <hr style="width:96%; border:none;">
 
 

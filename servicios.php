@@ -90,7 +90,7 @@ $totalRows_productos = mysqli_num_rows($productos);
         <?php do { ?>
           <div class="cont-servis">
             <input type="button" value="Reservar" onClick=location.href='reserva_wat_bd.php?id=<?php echo $row_servicios['Id']; ?>' class="button" />
-        <a href="reservar.php?id=<?php echo $row_servicios['Id']; ?>"><img src="imagenes/servicios/<?php echo $row_servicios['Imagen']; ?>" alt="<?php echo $row_servicios['Nombre']; ?>"/></a>
+        <a href="reservar.php?id=<?php echo $row_servicios['Id']; ?>"><img src="imagenes/Servicios/<?php echo $row_servicios['Imagen']; ?>" alt="<?php echo $row_servicios['Nombre']; ?>"/></a>
 
           <p><a href="reserva.php?id=<?php echo $row_servicios['Id']; ?>"><?php echo $row_servicios['Nombre']; ?></a></p>
 

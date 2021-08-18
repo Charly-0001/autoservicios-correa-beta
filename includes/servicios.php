@@ -55,10 +55,10 @@ $totalPages_servicios = ceil($totalRows_servicios/$maxRows_servicios)-1;
         <div class="publicidad_servis">
             <?php do { ?>
               <div class="cont-servis">
-                <input type="button" value="Reservar" onClick=location.href='reserva_wat_bd.php?id=<?php echo $row_servicios['id']; ?>' class="button" />
-            <a href="reservar.php?id=<?php echo $row_servicios['id']; ?>"><img src="imagenes/servicios/<?php echo $row_servicios['Imagen']; ?>" alt="<?php echo $row_servicios['Nombre']; ?>"/></a>
+                <input type="button" value="Reservar" onClick=location.href='reserva_wat_bd.php?id=<?php echo $row_servicios['Id']; ?>' class="button" />
+            <a href="reservar.php?id=<?php echo $row_servicios['Id']; ?>"><img src="imagenes/Servicios/<?php echo $row_servicios['Imagen']; ?>" alt="<?php echo $row_servicios['Nombre']; ?>"/></a>
 
-              <p><a href="reserva.php?id=<?php echo $row_servicios['id']; ?>"><?php echo $row_servicios['Nombre']; ?></a></p>
+              <p><a href="reserva.php?id=<?php echo $row_servicios['Id']; ?>"><?php echo $row_servicios['Nombre']; ?></a></p>
 
 
               </div>

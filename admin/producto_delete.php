@@ -41,8 +41,9 @@ if ((isset($_GET['Id'])) && ($_GET['Id'] != "")) {
   $dir="../imagenes/productos/".$row_producto['Imagen']; //ubicación en el host (EJ, /imagenes/foto.jpg)
   if(file_exists($dir)) //verifica que el archivo existe
    {
-   if(unlink($dir)) // si es true, llama la función
-  echo "El archivo fue borrado";
+   if(unlink($dir)){ // si es true, llama la función
+  //echo "El archivo fue borrado";
+   }
    }
   else{
    echo "Este archivo no existe";} //si no, lo avisa.

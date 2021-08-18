@@ -5,7 +5,7 @@ function validar(value) {
     location.href ="mi-perfil.php";
   }
 if(value=="cerrar_turno"){
-  location.href ="delete_SESSION.PHP";
+  location.href ="delete_SESSION.php";
 }
 if (value=="add") {
   location.href="mi-perfil.php?new=user";

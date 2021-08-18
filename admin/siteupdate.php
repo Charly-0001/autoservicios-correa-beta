@@ -76,6 +76,10 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
 }
 
 /*termino de validacion para no entrar a utras paginas con la url*/
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
 
 /*INFORMACION DE LA PAGINA*/
 $query_info = "SELECT * FROM sitio_web";
@@ -99,8 +103,9 @@ else{
   $dir="../img/".$row_info['Logo']; //ubicación en el host (EJ, /imagenes/foto.jpg)
   if(file_exists($dir)) //verifica que el archivo existe
    {
-   if(unlink($dir)) // si es true, llama la función
-  echo "El archivo fue borrado";
+   if(unlink($dir)){ // si es true, llama la función
+  //echo "El archivo fue borrado";
+   }
    }
   else{
    echo "Este archivo no existe";} //si no, lo avisa.
@@ -158,8 +163,9 @@ else{
   $dir="../img/banner/".$row_info['Banner_1']; //ubicación en el host (EJ, /imagenes/foto.jpg)
   if(file_exists($dir)) //verifica que el archivo existe
    {
-   if(unlink($dir)) // si es true, llama la función
-  echo "El archivo fue borrado";
+   if(unlink($dir)){ // si es true, llama la función
+  //echo "El archivo fue borrado";
+   }
    }
   else{
    echo "Este archivo no existe";} //si no, lo avisa.
@@ -178,8 +184,9 @@ else{
   $dir="../img/banner/".$row_info['Banner_2']; //ubicación en el host (EJ, /imagenes/foto.jpg)
   if(file_exists($dir)) //verifica que el archivo existe
    {
-   if(unlink($dir)) // si es true, llama la función
-  echo "El archivo fue borrado";
+   if(unlink($dir)){ // si es true, llama la función
+  //echo "El archivo fue borrado";
+   }
    }
   else{
    echo "Este archivo no existe";} //si no, lo avisa.
@@ -197,8 +204,9 @@ else{
   $dir="../img/banner/".$row_info['Banner_3']; //ubicación en el host (EJ, /imagenes/foto.jpg)
   if(file_exists($dir)) //verifica que el archivo existe
    {
-   if(unlink($dir)) // si es true, llama la función
-  echo "El archivo fue borrado";
+   if(unlink($dir)) {// si es true, llama la función
+  //echo "El archivo fue borrado";
+   }
    }
   else{
    echo "Este archivo no existe";} //si no, lo avisa.

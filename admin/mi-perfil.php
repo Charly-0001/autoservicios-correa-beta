@@ -1,10 +1,9 @@
-
-
+<?php require_once('../Connections/conexion2.php'); ?>
 <?php
 if (!function_exists("GetSQLValueString")) {
 function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDefinedValue = "")
 {
-   if (PHP_VERSION < 6) {
+   if (PHP_VERSION < 7) {
      $theValue = get_magic_quotes_gpc() ? stripslashes($theValue) : $theValue;
    }
  global $conexion2;
@@ -32,29 +31,29 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 }
 }
 
+
 if (!isset($_SESSION)) {
   session_start();
 }
 $MM_authorizedUsers = "";
 $MM_donotCheckaccess = "true";
 
-// *** Restrict Access To Page: Grant or deny access to this page
+// *** Restringir el acceso a la página: conceda o deniegue el acceso a esta página
 function isAuthorized($strUsers, $strGroups, $UserName, $UserGroup) {
-  // For security, start by assuming the visitor is NOT authorized.
+  // Por seguridad, comience asumiendo que el visitante NO está autorizado.
   $isValid = False;
 
-
-  // When a visitor has logged into this site, the Session variable MM_Username set equal to their username.
-  // Therefore, we know that a user is NOT logged in if that Session variable is blank.
+  // Cuando un visitante inicia sesión en este sitio, la variable de sesión MM_Username se establece igual a su nombre de usuario.
+  // Por lo tanto, sabemos que un usuario NO está conectado si esa variable de sesión está en blanco.
   if (!empty($UserName)) {
-    // Besides being logged in, you may restrict access to only certain users based on an ID established when they login.
-    // Parse the strings into arrays.
+    // Además de iniciar sesión, puede restringir el acceso solo a ciertos usuarios en función de una identificación establecida cuando inician sesión.
+    // Analice las cadenas en matrices.
     $arrUsers = Explode(",", $strUsers);
     $arrGroups = Explode(",", $strGroups);
     if (in_array($UserName, $arrUsers)) {
       $isValid = true;
     }
-    // Or, you may restrict access to only certain users based on their username.
+    // O puede restringir el acceso solo a ciertos usuarios según su nombre de usuario.
     if (in_array($UserGroup, $arrGroups)) {
       $isValid = true;
     }
@@ -64,6 +63,7 @@ function isAuthorized($strUsers, $strGroups, $UserName, $UserGroup) {
   }
   return $isValid;
 }
+
 $MM_restrictGoTo = "index.php";
 if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers, $_SESSION['MM_Username'], $_SESSION['MM_UserGroup'])))) {
   $MM_qsChar = "?";
@@ -75,12 +75,12 @@ if (!((isset($_SESSION['MM_Username'])) && (isAuthorized("",$MM_authorizedUsers,
   header("Location: ". $MM_restrictGoTo);
   exit;
 }
-?>
-<!--termino de validacion para no entrar a utras paginas con la url-->
-<?php require_once('../Connections/conexion2.php'); ?>
 
+$editFormAction = $_SERVER['PHP_SELF'];
+if (isset($_SERVER['QUERY_STRING'])) {
+  $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
+}
 
-<?php
 //AGREGAR USUARIO
 if ((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "addusuario")) {
 
@@ -152,11 +152,13 @@ else{
   $dir="../img/usuarios/".$row_perfiledit['foto']; //ubicación en el host (EJ, /imagenes/foto.jpg)
   if(file_exists($dir)) //verifica que el archivo existe
    {
-   if(unlink($dir)) // si es true, llama la función
-  echo "El archivo fue borrado";
+   if(unlink($dir)){ // si es true, llama la función
+  //echo "El archivo fue borrado";
+   }
    }
   else{
-   echo "Este archivo no existe";} //si no, lo avisa.
+   //echo "Este archivo no existe";
+   } //si no, lo avisa.
 
    $imagenperfil=$_FILES ["foto"]["name"];
     move_uploaded_file ($_FILES ["foto"]["tmp_name"],"../img/usuarios/".$imagenperfil);
@@ -224,11 +226,13 @@ else{
   $dir="../img/usuarios/".$row_useredit['foto']; //ubicación en el host (EJ, /imagenes/foto.jpg)
   if(file_exists($dir)) //verifica que el archivo existe
    {
-   if(unlink($dir)) // si es true, llama la función
-  echo "El archivo fue borrado";
+   if(unlink($dir)){ // si es true, llama la función
+  //echo "El archivo fue borrado";
+   }
    }
   else{
-   echo "Este archivo no existe";} //si no, lo avisa.
+   //echo "Este archivo no existe";
+   } //si no, lo avisa.
 
    $imagenuser=$_FILES ["fotouser"]["name"];
     move_uploaded_file ($_FILES ["fotouser"]["tmp_name"],"../img/usuarios/".$imagenuser);

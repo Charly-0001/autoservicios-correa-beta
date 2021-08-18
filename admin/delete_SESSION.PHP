@@ -1,6 +1,5 @@
 <?php
-require_once('log.php');
-$serrarsecion = serrarlog();
+
 // Inicializar la sesión.
 // Si está usando session_name("algo"), ¡no lo olvide ahora!
 session_start();
@@ -19,6 +18,12 @@ if (ini_get("session.use_cookies")) {
 }
 
 // Finalmente, destruir la sesión.
+
+
 session_destroy();
 header('Location: '.'index.php');
+
+require_once('log.php');
+$serrarsecion = serrarlog();
+
 ?>
